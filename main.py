@@ -4,9 +4,12 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    data = request.json
+    print("Webhook data received:", data)
+    # Call broker order function here
+    return {"status": "received"}, 200
 
 
 if __name__ == '__main__':
