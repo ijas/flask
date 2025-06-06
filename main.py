@@ -4,12 +4,13 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
-    data = request.json
-    print("Webhook data received:", data)
-    # Call broker order function here
-    return {"status": "received"}, 200
+    if request.method == 'POST':
+        data = request.json
+        print("Webhook received:", data)
+        return 'POST received', 200
+    return 'Webhook endpoint is live', 200
 
 
 if __name__ == '__main__':
