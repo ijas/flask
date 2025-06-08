@@ -15,6 +15,11 @@ def generate_signature(payload, timestamp):
     message = f'{timestamp}{json.dumps(payload)}'
     return hmac.new(DELTA_API_SECRET.encode(), message.encode(), hashlib.sha256).hexdigest()
 
+@app.route("/")
+def home():
+    print("Home route hit")
+    return "Hello from Flask on Railway"
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
